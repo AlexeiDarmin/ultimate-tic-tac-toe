@@ -49,9 +49,9 @@ class App extends React.Component<Props, State> {
 
     // Checks for wins along columns
     for (let c = 0; c < 3; ++c) {
-      if (board[boardIndex + (c * 3)] === board[boardIndex + (c * 3 + 1)] &&
-        board[boardIndex + (c * 3)] === board[boardIndex + (c * 3 + 2)] &&
-        board[boardIndex + (c * 3)] !== 0) {
+      if (board[boardIndex + c] === board[boardIndex + c + 3] &&
+        board[boardIndex + c] === board[boardIndex + c + 6] &&
+        board[boardIndex + c] !== 0) {
         newWonBoards[boardIndex / 9] = turn
         return newWonBoards
       }
@@ -89,16 +89,20 @@ class App extends React.Component<Props, State> {
     const newTurn = turn === 1 ? 2 : 1;
     const newWonBoards = this.getWonBoards({ board: newBoard, cellIndex, turn, wonBoards })
 
+    const sum = (listOfNumbers: Array<number>) => listOfNumbers.reduce((a, b) => a + b, 0)
+    
+    let unlockedBoard = sum(newWonBoards) !== sum(wonBoards) || newWonBoards[cellIndex % 9] > 0 ? -1 : cellIndex % 9
+
     this.setState({
       board: newBoard,
       turn: newTurn,
-      unlockedBoard: cellIndex % 9,
+      unlockedBoard: unlockedBoard,
       wonBoards: newWonBoards
     })
   }
 
   render() {
-    const { board, unlockedBoard } = this.state
+    const { board, unlockedBoard, wonBoards } = this.state
 
     console.log('state:', this.state)
     return (
@@ -115,6 +119,7 @@ class App extends React.Component<Props, State> {
               onClick={this.handlePlayerMove}
               board={board}
               unlocked={unlockedBoard === i || unlockedBoard === -1}
+              won={wonBoards[i]}
             />
           )}
         </div>

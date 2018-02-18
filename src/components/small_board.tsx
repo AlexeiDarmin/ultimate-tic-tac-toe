@@ -7,16 +7,17 @@ interface Props {
   boardIndex: number
   board: Board
   unlocked: boolean
+  won: number
 }
 
 class SmallBoard extends React.Component<Props> {
 
   renderCells = () => {
-    const { onClick, boardIndex, board, unlocked } = this.props
+    const { onClick, boardIndex, board, unlocked, won } = this.props
 
     return [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
       const cellIndex = boardIndex * 9 + i
-      const clickable = board[cellIndex] === 0 && unlocked
+      const clickable = board[cellIndex] === 0 && unlocked && !won
 
       return (
         <div
@@ -31,10 +32,10 @@ class SmallBoard extends React.Component<Props> {
   }
 
   render() {
-    const { unlocked } = this.props
+    const { unlocked, won } = this.props
 
     return (
-      <div className="tictactoeBoard" data-unlocked={unlocked}>
+      <div className="tictactoeBoard" data-unlocked={unlocked} data-won={won}>
         {this.renderCells()}
       </div>
     );

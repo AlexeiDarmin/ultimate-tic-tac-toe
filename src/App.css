@@ -67,6 +67,14 @@
   border-bottom: 0;
 }
 
+.tictactoeBoard[data-won="1"] {
+  background: #098631;
+}
+
+.tictactoeBoard[data-won="2"] {
+  background: red;
+}
+
 
 
 .cell {
