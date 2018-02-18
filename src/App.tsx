@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './App.css';
 
+import SmallBoard from './components/small_board';
 const logo = require('./logo.svg');
 
 class App extends React.Component {
@@ -9,11 +10,11 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Ultimate Tic Tac Toe</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <div className="megaTictactoeBoard">
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => <SmallBoard key={i} />)}
+        </div>
       </div>
     );
   }

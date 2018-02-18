@@ -26,3 +26,54 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.megaTictactoeBoard {
+  width: calc((((40px + 8px) * 3) + 28px) * 3);
+  border: 2px solid #5c5c5c;
+  font-size: 0;
+  margin: auto;
+  margin-top: 24px;
+  border-radius: 8px;
+  padding: 24px 0;
+}
+
+.tictactoeBoard {
+  width: calc((40px + 8px) * 3);
+  display: inline-block;
+  border-bottom: 2px solid #5c5c5c;
+  font-size: 0;
+  padding: 4px;
+}
+
+.tictactoeBoard:nth-of-type(3n - 1) {
+  border-left: 2px solid #5c5c5c;
+  border-right: 2px solid #5c5c5c;
+}
+
+.tictactoeBoard:nth-of-type(7) {
+  border-bottom: 0;
+}
+
+.tictactoeBoard:nth-of-type(8) {
+  border-bottom: 0;
+}
+
+.tictactoeBoard:nth-of-type(9) {
+  border-bottom: 0;
+}
+
+
+
+.cell {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background: #e6e6e6;
+  display: inline-block;
+}
+
+.cell:hover {
+  background:#cdcdcd;
+  cursor: pointer;
+}
