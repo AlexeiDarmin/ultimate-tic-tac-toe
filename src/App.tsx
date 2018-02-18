@@ -11,6 +11,7 @@ interface Props {
 interface State {
   board: Array<number>;
   turn: number;
+  unlockedBoard: number
 }
 
 class App extends React.Component<Props , State> {
@@ -25,7 +26,8 @@ class App extends React.Component<Props , State> {
 
     this.state = {
       board: defaultBoard,
-      turn: 1
+      turn: 1,
+      unlockedBoard: -1
     }
   }
 
@@ -37,10 +39,16 @@ class App extends React.Component<Props , State> {
 
     const newTurn = turn === 1 ? 2 : 1;
 
-    this.setState({ board: newBoard, turn: newTurn })
+    this.setState({ 
+      board: newBoard, 
+      turn: newTurn,
+      unlockedBoard: cellIndex % 9
+    })
   }
 
   render() {
+    const { board, unlockedBoard } = this.state
+
     console.log('state:', this.state)
     return (
       <div className="App">
@@ -50,7 +58,13 @@ class App extends React.Component<Props , State> {
         </header>
         <div className="megaTictactoeBoard">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(
-            (i) => <SmallBoard key={i} boardIndex={i} onClick={this.handlePlayerMove} board={this.state.board}/>
+            (i) => <SmallBoard 
+              key={i} 
+              boardIndex={i} 
+              onClick={this.handlePlayerMove} 
+              board={board} 
+              unlocked={unlockedBoard === i || unlockedBoard === -1}
+            />
           )}
         </div>
       </div>
