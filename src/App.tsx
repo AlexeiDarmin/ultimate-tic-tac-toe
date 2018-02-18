@@ -4,17 +4,27 @@ import './App.css';
 import SmallBoard from './components/small_board';
 const logo = require('./logo.svg');
 
+export type Board = Array<number>
+
 interface Props {
 
 }
 
 interface State {
-  board: Array<number>;
+  board: Board
   turn: number;
   unlockedBoard: number
+  wonBoards: Array<number>
 }
 
-class App extends React.Component<Props , State> {
+interface wonBoardsOptions {
+  board: Board
+  cellIndex: number
+  turn: number
+  wonBoards: Array<number>
+}
+
+class App extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
@@ -27,22 +37,63 @@ class App extends React.Component<Props , State> {
     this.state = {
       board: defaultBoard,
       turn: 1,
-      unlockedBoard: -1
+      unlockedBoard: -1,
+      wonBoards: [0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   }
 
+
+  getWonBoards = ({ board, cellIndex, turn, wonBoards }: wonBoardsOptions): Board => {
+    const boardIndex = Math.floor(cellIndex / 9) * 9
+    const newWonBoards = wonBoards.slice()
+
+    // Checks for wins along columns
+    for (let c = 0; c < 3; ++c) {
+      if (board[boardIndex + (c * 3)] === board[boardIndex + (c * 3 + 1)] &&
+        board[boardIndex + (c * 3)] === board[boardIndex + (c * 3 + 2)] &&
+        board[boardIndex + (c * 3)] !== 0) {
+        newWonBoards[boardIndex / 9] = turn
+        return newWonBoards
+      }
+    }
+
+    // Checks for wins along rows
+    for (let r = 0; r < 3; ++r) {
+      if (board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 3)] &&
+        board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 6)] &&
+        board[boardIndex + (r * 3)] !== 0) {
+        newWonBoards[boardIndex / 9] = turn
+        return newWonBoards
+      }
+    }
+
+    // Checks for wins along diagonals
+    if ((
+        (board[boardIndex] === board[boardIndex + 4] && board[boardIndex] === board[boardIndex + 8]) ||
+        (board[boardIndex + 2] === board[boardIndex + 4] && board[boardIndex + 2] === board[boardIndex + 6])
+        ) &&
+        board[boardIndex + 4] !== 0
+    ) {
+      newWonBoards[boardIndex / 9] = turn
+    }
+
+    return newWonBoards
+  }
+
   handlePlayerMove = (cellIndex: number) => {
-    const { board, turn } = this.state
+    const { board, turn, wonBoards } = this.state
 
     const newBoard = board.slice()
     newBoard[cellIndex] = turn
 
     const newTurn = turn === 1 ? 2 : 1;
+    const newWonBoards = this.getWonBoards({ board: newBoard, cellIndex, turn, wonBoards })
 
-    this.setState({ 
-      board: newBoard, 
+    this.setState({
+      board: newBoard,
       turn: newTurn,
-      unlockedBoard: cellIndex % 9
+      unlockedBoard: cellIndex % 9,
+      wonBoards: newWonBoards
     })
   }
 
@@ -58,11 +109,11 @@ class App extends React.Component<Props , State> {
         </header>
         <div className="megaTictactoeBoard">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(
-            (i) => <SmallBoard 
-              key={i} 
-              boardIndex={i} 
-              onClick={this.handlePlayerMove} 
-              board={board} 
+            (i) => <SmallBoard
+              key={i}
+              boardIndex={i}
+              onClick={this.handlePlayerMove}
+              board={board}
               unlocked={unlockedBoard === i || unlockedBoard === -1}
             />
           )}

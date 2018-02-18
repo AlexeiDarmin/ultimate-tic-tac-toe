@@ -79,7 +79,7 @@
   background: white;
 }
 
-.cell:hover {
+.cell[data-clickable="true"]:hover {
   background:#cdcdcd;
   cursor: pointer;
 }

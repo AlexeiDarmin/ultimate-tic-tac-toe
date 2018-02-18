@@ -1,10 +1,11 @@
 import * as React from 'react';
 import '../App.css';
+import { Board } from '../App';
 
 interface Props {
   onClick: Function
   boardIndex: number
-  board: Array<number>
+  board: Board
   unlocked: boolean
 }
 
@@ -15,13 +16,15 @@ class SmallBoard extends React.Component<Props> {
 
     return [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
       const cellIndex = boardIndex * 9 + i
-      console.log(board[cellIndex])
+      const clickable = board[cellIndex] === 0 && unlocked
+
       return (
         <div
           className="cell"
           data-player={board[cellIndex]}
+          data-clickable={clickable}
           key={i}
-          onClick={() => board[cellIndex] === 0 && unlocked ? onClick(cellIndex) : null}
+          onClick={() => clickable ? onClick(cellIndex) : null}
         />
       )
     })
