@@ -77,3 +77,15 @@
   background:#cdcdcd;
   cursor: pointer;
 }
+
+.cell[data-player="0"] {
+  background:green;
+}
+
+.cell[data-player="1"] {
+  background:black;
+}
+
+.cell[data-player="2"] {
+  background:red;
+}

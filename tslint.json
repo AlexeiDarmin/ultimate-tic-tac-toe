@@ -22,7 +22,7 @@
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
-        "max-line-length": [ true, 120 ],
+        "max-line-length": [ true, 180 ],
         "member-ordering": [
             true,
             "public-before-private",
@@ -33,7 +33,7 @@
         "no-arg": true,
         "no-bitwise": true,
         "no-console": [
-            true,
+            false,
             "log",
             "error",
             "debug",
@@ -44,7 +44,7 @@
         ],
         "no-consecutive-blank-lines": true,
         "no-construct": true,
-        "no-debugger": true,
+        "no-debugger": false,
         "no-duplicate-variable": true,
         "no-empty": true,
         "no-eval": true,
@@ -55,7 +55,7 @@
         "no-unused-expression": true,
         "no-use-before-declare": true,
         "one-line": [
-            true,
+            false,
             "check-catch",
             "check-else",
             "check-open-brace",
@@ -63,7 +63,7 @@
         ],
         "quotemark": [true, "single", "jsx-double"],
         "radix": true,
-        "semicolon": [true, "always"],
+        "semicolon": [false, "always"],
         "switch-default": true,
 
         "trailing-comma": [false],
