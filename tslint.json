@@ -1,5 +1,4 @@
 {
-    "extends": ["tslint-react"],
     "rules": {
         "align": [
             true,
@@ -54,13 +53,6 @@
         "no-trailing-whitespace": false,
         "no-unused-expression": true,
         "no-use-before-declare": true,
-        "one-line": [
-            false,
-            "check-catch",
-            "check-else",
-            "check-open-brace",
-            "check-whitespace"
-        ],
         "quotemark": [true, "single", "jsx-double"],
         "radix": true,
         "semicolon": [false, "always"],

@@ -75,6 +75,19 @@ class App extends React.Component<Props, State> {
         board[boardIndex + 4] !== 0
     ) {
       newWonBoards[boardIndex / 9] = turn
+      return newWonBoards
+    }
+
+    // Checks if board has any moves available
+    let movesAvailable = false
+    for (let i = boardIndex ; i < boardIndex + 9; ++i) {
+      if (board[i] === 0) {
+        movesAvailable = true
+      }
+    }
+
+    if (!movesAvailable) {
+      newWonBoards[boardIndex / 9] = -1
     }
 
     return newWonBoards
@@ -90,8 +103,20 @@ class App extends React.Component<Props, State> {
     const newWonBoards = this.getWonBoards({ board: newBoard, cellIndex, turn, wonBoards })
 
     const sum = (listOfNumbers: Array<number>) => listOfNumbers.reduce((a, b) => a + b, 0)
-    
+  
+    // Finds next unlocked board, if that board has no available moves then all boards become unlocked.
     let unlockedBoard = sum(newWonBoards) !== sum(wonBoards) || newWonBoards[cellIndex % 9] > 0 ? -1 : cellIndex % 9
+    
+    let movesAvailable = false
+    for (let i = unlockedBoard * 9 ; i < unlockedBoard * 9 + 9; ++i) {
+      if (board[i] === 0) {
+        movesAvailable = true
+      }
+    }
+
+    if (!movesAvailable) {
+      unlockedBoard = -1
+    }
 
     this.setState({
       board: newBoard,
