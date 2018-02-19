@@ -59,8 +59,8 @@ class App extends React.Component<Props, State> {
 
     // Checks for wins along rows
     for (let r = 0; r < 3; ++r) {
-      if (board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 3)] &&
-        board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 6)] &&
+      if (board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 1)] &&
+        board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 2)] &&
         board[boardIndex + (r * 3)] !== 0) {
         newWonBoards[boardIndex / 9] = turn
         return newWonBoards

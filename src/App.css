@@ -84,6 +84,11 @@
   display: inline-block;
   border: 1px solid black;
   box-sizing: border-box;
+  background: rgba(255,255,255, 0.5);
+}
+
+
+.cell[data-clickable="true"] {
   background: white;
 }
 
@@ -99,3 +104,13 @@
 .cell[data-player="2"] {
   background:red;
 }
+
+
+/* losing cells get 50% opacity */
+.cell[data-player="2"][data-won="1"] {
+  background: rgba(255, 0, 0, 0.5)
+} 
+
+.cell[data-player="1"][data-won="2"] {
+  background: rgba(0, 255, 0, 0.5)
+} 

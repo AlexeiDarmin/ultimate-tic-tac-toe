@@ -24,6 +24,7 @@ class SmallBoard extends React.Component<Props> {
           className="cell"
           data-player={board[cellIndex]}
           data-clickable={clickable}
+          data-won={won}
           key={i}
           onClick={() => clickable ? onClick(cellIndex) : null}
         />
