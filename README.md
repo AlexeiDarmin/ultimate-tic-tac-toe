@@ -1,30 +1,47 @@
 # Ultimate Tic Tac Toe
 
-[Coming soon] A client, react component, and bots for [Ultimate Tic Tac Toe](https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe). 
-![midgame v0.1.0](https://raw.githubusercontent.com/AlexeiDarmin/ultimate-tic-tac-toe/5cdf185de7e4429c07d0827d49423005db9d001a/src/images/screencap%20v0.1.0.png "midgame v0.1.0")
+A client and react component for [Ultimate Tic Tac Toe](https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe). AI coming soon.
+![midgame v0.1.0](https://github.com/AlexeiDarmin/ultimate-tic-tac-toe/blob/master/src/images/screencap%20v0.1.0.png?raw=true "midgame v0.1.0")
 
-### Installation
+## Installation
 
-```sh
-$ npm install ultimate-tic-tac-toe
+```
+npm i ultimate-tic-tac-toe
 ```
 
-### Usage
-
+## Usage
 To import and render the react component (which includes the game internally).
-```sh
-$ import { UltimateTTT} from 'ultimate-tic-tac-toe'
-$
-$ export yourReactComponent = (props) => {
-    return <UltimateTTT />
+```
+import { UltimateTTT} from 'ultimate-tic-tac-toe'
+
+export yourReactComponent = (props) => {
+  return <UltimateTTT />
 }
 ```
 
 To import the game only.
 
-```sh
-$ import { Game } from 'ultimate-tic-tac-toe'
-$ const game = new Game()
+```
+import { Game } from 'ultimate-tic-tac-toe'
+const game = new Game()
 ```
 
-These docs will be updated with an API for the game as soon as its finalized.
+## API
+
+### .move(index)
+Attempts to make a move to the specificed index, a number between 0 - 80. Returns true upon success or throws an error for an invalid move.
+
+### .getBoard()
+Returns the current board state as an array of length 81. 0s represet empty cells. 1s represent cells where player_one has moved. 2s represent where player_two has moved.
+
+### .isGameOver()
+Returns true if the game has ended by either player winning or a draw. Returns false otherwise.
+
+### .print() - coming soon
+Prints a text representation of the board.
+
+### .undoMove() - coming soon
+Undoes the previous move.
+
+### .getMoves() - coming soon
+Returns an array of numbers representing the cells where the current player can move.
