@@ -47,8 +47,6 @@ class App extends React.Component<Props, State> {
   render() {
     const { board, unlockedBoard, wonBoards } = this.state
 
-
-    console.log('state:', this.state)
     return (
       <div className="App">
         <header className="App-header">

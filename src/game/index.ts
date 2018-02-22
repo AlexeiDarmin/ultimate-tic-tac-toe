@@ -13,12 +13,14 @@ class Game {
   turn: 1 | 2
   unlockedBoard: number
   wonBoards: Board
+  gameOver: boolean
 
   constructor() {
     this.board = '0'.repeat(81).split('').map((x) => parseInt(x))
+    this.wonBoards = '0'.repeat(9).split('').map((x) => parseInt(x))
     this.turn = PLAYER_ONE
     this.unlockedBoard = -1
-    this.wonBoards = new Array(9)
+    this.gameOver = false
   }
 
   move(index) {
@@ -49,6 +51,25 @@ class Game {
     this.turn = newTurn,
     this.unlockedBoard = unlockedBoard,
     this.wonBoards = newWonBoards
+    this.checkIfGameOver()
+  }
+  checkIfGameOver() {
+    const wonBoards = this.wonBoards
+
+    if ((wonBoards[0] === wonBoards[1] && wonBoards[0] === wonBoards[2] && wonBoards[0] !== EMPTY) ||
+        (wonBoards[3] === wonBoards[4] && wonBoards[3] === wonBoards[5] && wonBoards[3] !== EMPTY) ||
+        (wonBoards[6] === wonBoards[7] && wonBoards[6] === wonBoards[8] && wonBoards[6] !== EMPTY) ||
+        (wonBoards[0] === wonBoards[3] && wonBoards[0] === wonBoards[6] && wonBoards[0] !== EMPTY) ||
+        (wonBoards[1] === wonBoards[4] && wonBoards[1] === wonBoards[7] && wonBoards[1] !== EMPTY) ||
+        (wonBoards[2] === wonBoards[5] && wonBoards[2] === wonBoards[8] && wonBoards[2] !== EMPTY) ||
+        (wonBoards[0] === wonBoards[4] && wonBoards[0] === wonBoards[8] && wonBoards[0] !== EMPTY) ||
+        (wonBoards[2] === wonBoards[4] && wonBoards[2] === wonBoards[6] && wonBoards[2] !== EMPTY)
+    ) {
+      this.gameOver = true
+    }
+  }
+  isGameOver() {
+    return this.gameOver
   }
   getBoard(): Board {
     return this.board
