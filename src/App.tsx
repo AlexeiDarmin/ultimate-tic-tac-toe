@@ -1,10 +1,13 @@
 import * as React from 'react';
 import './App.css';
 
+import Game from './game'
 import SmallBoard from './components/small_board';
 const logo = require('./logo.svg');
 
 export type Board = Array<number>
+
+let game: any = new Game()
 
 interface Props {
 
@@ -17,117 +20,33 @@ interface State {
   wonBoards: Array<number>
 }
 
-interface wonBoardsOptions {
-  board: Board
-  cellIndex: number
-  turn: number
-  wonBoards: Array<number>
-}
-
 class App extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
 
-    let defaultBoard = []
-    for (let i = 0; i < 81; ++i) {
-      defaultBoard.push(0)
-    }
-
     this.state = {
-      board: defaultBoard,
-      turn: 1,
-      unlockedBoard: -1,
-      wonBoards: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      board: game.getBoard(),
+      turn: game.getPlayerTurn(),
+      unlockedBoard: game.getUnlockedBoard(),
+      wonBoards: game.getWonBoards()
     }
-  }
-
-
-  getWonBoards = ({ board, cellIndex, turn, wonBoards }: wonBoardsOptions): Board => {
-    const boardIndex = Math.floor(cellIndex / 9) * 9
-    const newWonBoards = wonBoards.slice()
-
-    // Checks for wins along columns
-    for (let c = 0; c < 3; ++c) {
-      if (board[boardIndex + c] === board[boardIndex + c + 3] &&
-        board[boardIndex + c] === board[boardIndex + c + 6] &&
-        board[boardIndex + c] !== 0) {
-        newWonBoards[boardIndex / 9] = turn
-        return newWonBoards
-      }
-    }
-
-    // Checks for wins along rows
-    for (let r = 0; r < 3; ++r) {
-      if (board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 1)] &&
-        board[boardIndex + (r * 3)] === board[boardIndex + (r * 3 + 2)] &&
-        board[boardIndex + (r * 3)] !== 0) {
-        newWonBoards[boardIndex / 9] = turn
-        return newWonBoards
-      }
-    }
-
-    // Checks for wins along diagonals
-    if ((
-        (board[boardIndex] === board[boardIndex + 4] && board[boardIndex] === board[boardIndex + 8]) ||
-        (board[boardIndex + 2] === board[boardIndex + 4] && board[boardIndex + 2] === board[boardIndex + 6])
-        ) &&
-        board[boardIndex + 4] !== 0
-    ) {
-      newWonBoards[boardIndex / 9] = turn
-      return newWonBoards
-    }
-
-    // Checks if board has any moves available
-    let movesAvailable = false
-    for (let i = boardIndex ; i < boardIndex + 9; ++i) {
-      if (board[i] === 0) {
-        movesAvailable = true
-      }
-    }
-
-    if (!movesAvailable) {
-      newWonBoards[boardIndex / 9] = -1
-    }
-
-    return newWonBoards
   }
 
   handlePlayerMove = (cellIndex: number) => {
-    const { board, turn, wonBoards } = this.state
-
-    const newBoard = board.slice()
-    newBoard[cellIndex] = turn
-
-    const newTurn = turn === 1 ? 2 : 1;
-    const newWonBoards = this.getWonBoards({ board: newBoard, cellIndex, turn, wonBoards })
-
-    const sum = (listOfNumbers: Array<number>) => listOfNumbers.reduce((a, b) => a + b, 0)
+    game.move(cellIndex)
   
-    // Finds next unlocked board, if that board has no available moves then all boards become unlocked.
-    let unlockedBoard = sum(newWonBoards) !== sum(wonBoards) || newWonBoards[cellIndex % 9] > 0 ? -1 : cellIndex % 9
-    
-    let movesAvailable = false
-    for (let i = unlockedBoard * 9 ; i < unlockedBoard * 9 + 9; ++i) {
-      if (board[i] === 0) {
-        movesAvailable = true
-      }
-    }
-
-    if (!movesAvailable) {
-      unlockedBoard = -1
-    }
-
     this.setState({
-      board: newBoard,
-      turn: newTurn,
-      unlockedBoard: unlockedBoard,
-      wonBoards: newWonBoards
+      board: game.getBoard(),
+      turn: game.getPlayerTurn(),
+      unlockedBoard: game.getUnlockedBoard(),
+      wonBoards: game.getWonBoards()
     })
   }
 
   render() {
     const { board, unlockedBoard, wonBoards } = this.state
+
 
     console.log('state:', this.state)
     return (

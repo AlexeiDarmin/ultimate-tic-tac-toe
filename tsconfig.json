@@ -9,13 +9,13 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": false
   },
   "exclude": [
     "node_modules",
