@@ -1,7 +1,10 @@
 {
-  "name": "my-app",
+  "name": "ultimate-tic-tac-toe",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "author": "Alexei Darmin",
+  "keywords": ["ultimate-tic-tac-toe", "tic tac toe", "ttt", "ultimate-ttt", "UTTT"],
+  "description": "A JavaScript implementation of Ultimate Tic Tac Toe",
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
