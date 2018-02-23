@@ -11,17 +11,15 @@ class Game {
     this.turn = PLAYER_ONE
     this.unlockedBoard = -1
     this.gameOver = false
-    this.load()
+    // this.load()
   }
 
-  load(){
-    console.log('initializing')
-    this.board = []
-    for (let i = 0; i < 81; ++i) {
-      this.board.push(0)
-    }
-    console.log(this.board)
-  }
+//   load(){
+//     this.board = []
+//     for (let i = 0; i < 81; ++i) {
+//       this.board.push(0)
+//     }
+//   }
 
   move(index) {
     const newBoard = this.board.slice()

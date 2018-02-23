@@ -1,7 +1,10 @@
+
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "ultimate-tic-tac-toe",
+  "version": "0.1.2",
+  "private": false,
+  "author": "Alexei Darmin",
+  "keywords": ["ultimate-tic-tac-toe", "tic tac toe", "ttt", "ultimate-ttt", "UTTT", "react"],
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -15,3 +18,5 @@
     "eject": "react-scripts eject"
   }
 }
+
+
