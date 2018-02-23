@@ -1,0 +1,131 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .App-title {
+    font-size: 1.5em;
+  }
+  
+  .App-intro {
+    font-size: large;
+  }
+  
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  
+  .megaTictactoeBoard {
+    border: 2px solid #5c5c5c;
+    font-size: 0;
+    margin: auto;
+    margin-top: 24px;
+    border-radius: 8px;
+    width: 460px;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .tictactoeBoard {
+    width: calc((40px + 8px) * 3);
+    display: inline-block;
+    border-bottom: 2px solid #5c5c5c;
+    font-size: 0;
+    padding: 4px;
+  }
+  
+  .tictactoeBoard[data-unlocked="true"] {
+    background: #ffff69;
+  }
+  
+  .tictactoeBoard:nth-of-type(3n - 1) {
+    border-left: 2px solid #5c5c5c;
+    border-right: 2px solid #5c5c5c;
+  }
+  
+  .tictactoeBoard:nth-of-type(7) {
+    border-bottom: 0;
+  }
+  
+  .tictactoeBoard:nth-of-type(8) {
+    border-bottom: 0;
+  }
+  
+  .tictactoeBoard:nth-of-type(9) {
+    border-bottom: 0;
+  }
+  
+  .tictactoeBoard[data-won="-1"] {
+    background: #a3a3a3;
+  }
+  
+  .tictactoeBoard[data-won="1"] {
+    background: #098631;
+  }
+  
+  .tictactoeBoard[data-won="2"] {
+    background: red;
+  }
+  
+  
+  
+  .cell {
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    display: inline-block;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background: rgba(255,255,255, 0.5);
+    border-radius: 4px;
+  }
+  
+  
+  .cell[data-clickable="true"] {
+    background: white;
+  }
+  
+  .cell[data-clickable="true"]:hover {
+    background:#cdcdcd;
+    cursor: pointer;
+  }
+  
+  .cell[data-player="1"] {
+    background:#098631;
+  }
+  
+  .cell[data-player="2"] {
+    background:red;
+  }
+  
+  
+  /* losing cells get 50% opacity */
+  .cell[data-player="2"][data-won="1"] {
+    background: rgba(255, 0, 0, 0.5)
+  } 
+  
+  .cell[data-player="1"][data-won="2"] {
+    background: rgba(0, 255, 0, 0.5)
+  } 
+  
+  /* Neutral grid cells get 25% opacity */
+  .cell[data-player="2"][data-won="-1"] {
+    background: rgba(255, 0, 0, 0.25)
+  } 
+  
+  .cell[data-player="1"][data-won="-1"] {
+    background: rgba(0, 255, 0, 0.25)
+  } 

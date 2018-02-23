@@ -1,0 +1,5 @@
+{
+    "private": true,
+    "name": "ultimate_tic_tac_toe",
+    "main": "./index.js"
+   }
