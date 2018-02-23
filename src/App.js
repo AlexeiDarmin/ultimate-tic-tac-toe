@@ -5,24 +5,11 @@ import Game from './game'
 import SmallBoard from './components/small_board';
 const logo = require('./logo.svg');
 
-export type Board = Array<number>
+let game = new Game()
 
-let game: any = new Game()
+class App extends React.Component {
 
-interface Props {
-
-}
-
-interface State {
-  board: Board
-  turn: number;
-  unlockedBoard: number
-  wonBoards: Array<number>
-}
-
-class App extends React.Component<Props, State> {
-
-  constructor(props: Props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -33,7 +20,7 @@ class App extends React.Component<Props, State> {
     }
   }
 
-  handlePlayerMove = (cellIndex: number) => {
+  handlePlayerMove = (cellIndex) => {
     game.move(cellIndex)
   
     this.setState({
@@ -49,10 +36,6 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Ultimate Tic Tac Toe</h1>
-        </header>
         <div className="megaTictactoeBoard">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(
             (i) => <SmallBoard

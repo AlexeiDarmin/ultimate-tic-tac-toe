@@ -1,19 +1,9 @@
-// Types
-type Board = Array<number>
-type Turn = 1 | 2
-
-
-// Constnts
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const EMPTY = 0
 
 class Game {
-  board: Board
-  turn: 1 | 2
-  unlockedBoard: number
-  wonBoards: Board
-  gameOver: boolean
+  board = []
 
   constructor() {
     this.board = '0'.repeat(81).split('').map((x) => parseInt(x))
@@ -21,6 +11,16 @@ class Game {
     this.turn = PLAYER_ONE
     this.unlockedBoard = -1
     this.gameOver = false
+    this.load()
+  }
+
+  load(){
+    console.log('initializing')
+    this.board = []
+    for (let i = 0; i < 81; ++i) {
+      this.board.push(0)
+    }
+    console.log(this.board)
   }
 
   move(index) {
@@ -31,7 +31,7 @@ class Game {
     const newTurn = turn === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
     const newWonBoards = this.getWonBoards({ board: newBoard, index, turn })
 
-    const sum = (listOfNumbers: Array<number>) => listOfNumbers.reduce((a, b) => a + b, 0)
+    const sum = (listOfNumbers) => listOfNumbers.reduce((a, b) => a + b, 0)
 
     // Finds next unlocked board, if that board has no available moves then all boards become unlocked.
     let unlockedBoard = sum(newWonBoards) !== sum(this.wonBoards) || newWonBoards[index % 9] > 0 ? -1 : index % 9
@@ -71,7 +71,7 @@ class Game {
   isGameOver() {
     return this.gameOver
   }
-  getBoard(): Board {
+  getBoard() {
     return this.board
   }
   getPlayerTurn() {
