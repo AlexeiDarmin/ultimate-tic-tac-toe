@@ -13,18 +13,23 @@ npm i ultimate-tic-tac-toe
 ```
 
 ## Usage
-To import and render the react component (which includes the game internally).
+To import and render the react component, note that all props are optional:
 
 ```js
 import { UltimateTTT } from 'ultimate-tic-tac-toe'
 
 export yourReactComponent = (props) => {
-  return <UltimateTTT />
+  return <UltimateTicTacToe playerOne="human" playerTwo="bot_level_one" />
 }
 ```
+| Prop      | Data type | Default value | Values available                                 | Additional information                                                        |
+|-----------|-----------|---------------|--------------------------------------------------|-------------------------------------------------------------------------------|
+| playerOne | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one'` | 'bot_level_one' beats 'bot_level_zero' three out of four times.               |
+| playerTwo | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one'` | 'bot_level_one' beats 'bot_level_zero' three out of four times.               |
+| loopGame  | boolean   | `false`       | `true`, `false`                                  | Resets the game once it's complete, useful for comparing bots over many games |
+| moveDelay | number    | `1000`        | A number in milliseconds                         | Represents the time between bot moves                                         |
 
-To import the client only and play a game to completion randomly.
-
+To import and run the client only:
 ```js
 import { Game } from 'ultimate-tic-tac-toe'
 const game = new Game()
@@ -42,10 +47,29 @@ console.log(game.print());
 ### .move(index)
 Attempts to make a move to the specificed index, a number between 0 - 80. Returns true upon success.
 
+
+### .getMoves()
+Returns an array of numbers representing the cells where the current player can move.
+```js
+game.getMoves() // -> [0, 2, 3, 11, 13]
+```
+
+### getMoveCount()
+Returns a number representing the number of moves that have been played in the current game. 
+```js 
+game.getMoveCount() // -> 5 
+```
+
+### getMoveFromBot({ skill })
+Takes an object with a skill attribute which is a number, currently 0 or 1. Runs a bot of that skill level on the current game position and returns a move suggestion by that bot. 
+```js
+game.getMoveFromBot({ skill: 1 }) // -> 17
+```
+
 ### .getBoard()
 Returns the current board state as an array of length 81. 0s represet empty cells. 1s represent cells where player_one has moved. 2s represent where player_two has moved.
 ```js
-game.getBaord() // -> [1, 1, 1, 0, 0, 2, 2, 1, 1, 2, 0, 1, 1, 2, 0, 2, 0, 2, 2, 1, 0, 2, 1, 1, 0, 2, 1, 1, 1, 1, 2, 2, 0, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 0, 1, 0, 2, 0, 2, 2, 1, 1, 2, 1, 0, 0, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 2, 2, 1, 0, 1, 0, 2]
+game.getBoard() // -> [1, 1, 1, 0, 0, 2, 2, 1, 1, 2, 0, 1, 1, 2, 0, 2, 0, 2, 2, 1, 0, 2, 1, 1, 0, 2, 1, 1, 1, 1, 2, 2, 0, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 0, 1, 0, 2, 0, 2, 2, 1, 1, 2, 1, 0, 0, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 2, 2, 1, 0, 1, 0, 2]
 ```
 
 
@@ -74,12 +98,6 @@ xxo|---|---
 xxo|---|---
 ...........
 */
-```
-
-### .getMoves()
-Returns an array of numbers representing the cells where the current player can move.
-```js
-game.getMoves() // -> [0, 2, 3, 11, 13]
 ```
 
 ### .undoMove() - coming soon
