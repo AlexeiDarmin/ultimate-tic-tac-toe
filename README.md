@@ -22,12 +22,12 @@ export yourReactComponent = (props) => {
   return <UltimateTicTacToe playerOne="human" playerTwo="bot_level_one" />
 }
 ```
-| Prop      | Data type | Default value | Values available                                 | Additional information                                                        |
-|-----------|-----------|---------------|--------------------------------------------------|-------------------------------------------------------------------------------|
-| playerOne | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one'` | 'bot_level_one' beats 'bot_level_zero' three out of four times.               |
-| playerTwo | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one'` | 'bot_level_one' beats 'bot_level_zero' three out of four times.               |
-| loopGame  | boolean   | `false`       | `true`, `false`                                  | Resets the game once it's complete, useful for comparing bots over many games |
-| moveDelay | number    | `1000`        | A number in milliseconds                         | Represents the time between bot moves                                         |
+| Prop      | Data type | Default value | Values available                                                  | Additional information                                                        |
+|-----------|-----------|---------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| playerOne | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one', 'bot_level_two'` | The higher the level the higher the skill of the bot                          |
+| playerTwo | string    | `'human'`     | `'human'`, `'bot_level_zero'`, `'bot_level_one', 'bot_level_two'` | The higher the level the higher the skill of the bot                          |
+| loopGame  | boolean   | `false`       | `true`, `false`                                                   | Resets the game once it's complete, useful for comparing bots over many games |
+| moveDelay | number    | `1000`        | A number in milliseconds                                          | Represents the time between bot moves                                         |
 
 To import and run the client only:
 ```js
