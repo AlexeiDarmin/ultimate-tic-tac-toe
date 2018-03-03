@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return <UltimateTicTacToe 
       playerOne="human" 
-      playerTwo="human" 
+      playerTwo="bot_level_two" 
       loopGame={true} 
       moveDelay={50}
     />
