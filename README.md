@@ -13,13 +13,24 @@ npm i ultimate-tic-tac-toe
 ```
 
 ## Usage
-To import and render the react component, note that all props are optional:
+To import and render the react component, note all props are optional and the TicTacToe component takes no props:
 
 ```js
-import { UltimateTTT } from 'ultimate-tic-tac-toe'
+import { UltimateTicTacToe, TicTacToe } from 'ultimate_tic_tic_toe';
 
-export yourReactComponent = (props) => {
-  return <UltimateTicTacToe playerOne="human" playerTwo="bot_level_one" />
+class App extends React.Component {
+
+  render() {
+    return <div>
+      <UltimateTicTacToe 
+      playerOne="human" 
+      playerTwo="bot_level_two" 
+      loopGame={true} 
+      moveDelay={50}
+    />
+    <TicTacToe />
+    </div>
+  }
 }
 ```
 | Prop      | Data type | Default value | Values available                                                  | Additional information                                                        |
