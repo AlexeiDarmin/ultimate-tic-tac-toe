@@ -8,7 +8,7 @@ class App extends React.Component {
     return <div>
       <UltimateTicTacToe 
       playerOne="human" 
-      playerTwo="bot_level_two" 
+      playerTwo="ai_mist" 
       loopGame={true} 
       moveDelay={50}
     />
