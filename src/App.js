@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     return <div>
       <UltimateTicTacToe 
-      playerOne="human" 
+      playerOne="bot_level_zero" 
       playerTwo="ai_mist" 
       loopGame={true} 
       moveDelay={50}
